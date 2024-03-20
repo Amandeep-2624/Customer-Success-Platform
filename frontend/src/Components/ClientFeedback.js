@@ -49,7 +49,9 @@ function ClientFeedback({ projectId,role}) {
         `http://localhost:5000/api/client-feedback`,
         newFeedback
       );
-      setClientFeedback([...ClientFeedback, newFeedback]);
+      const updatedClientResponse=await axios.get(`http://localhost:5000/api/client-feedback/${projectId}`);
+
+      setClientFeedback(updatedClientResponse.data);
       setNewFeedback({
         projectId: `${projectId}`,
         feedbackType: "",

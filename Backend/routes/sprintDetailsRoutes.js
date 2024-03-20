@@ -44,7 +44,7 @@ router.get('/sprints/:projectId/:id', async (req, res) => {
 });
 
 // Update sprint entry
-router.patch('/sprints/:projectId/:id', async (req, res) => {
+router.put('/sprints/:projectId/:id', async (req, res) => {
   try {
     const updatedSprint = await SprintDetails.findOneAndUpdate(
       { _id: req.params.id, projectId: req.params.projectId },
@@ -58,10 +58,10 @@ router.patch('/sprints/:projectId/:id', async (req, res) => {
 });
 
 // Delete sprint entry
-router.delete('/sprints/:projectId/:id', async (req, res) => {
+router.delete('/sprints/:id', async (req, res) => {
   try {
-    await SprintDetails.findOneAndDelete({ _id: req.params.id, projectId: req.params.projectId });
-    res.json({ message: 'Sprint deleted' });
+    await SprintDetails.findByIdAndDelete(req.params.id);
+    res.json({ message: 'sprint entry deleted' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

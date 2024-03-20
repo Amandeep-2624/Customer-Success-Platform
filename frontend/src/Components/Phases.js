@@ -47,7 +47,9 @@ function Phases({ projectId,role }) {
         `http://localhost:5000/api/phases`,
         newProjectPhase
       );
-      setPhase([...ProjectPhases, newProjectPhase]);
+      const updatedPhaseResponse=await axios.get(`http://localhost:5000/api/phases/${projectId}`);
+
+      setPhase(updatedPhaseResponse.data);
       setNewPhase({
         projectId: `${projectId}`,
         Title: "",
@@ -120,7 +122,7 @@ function Phases({ projectId,role }) {
     <div>
       <div className="top-btns">
       {(role==="Admin"  || role==="Project Manger") && ( <button className="add-version-btn" onClick={handleAddNewPhase}>
-        Add Audit
+        Add Phase
       </button>)}
       <button className="download-pdf-btn" onClick={handleDownloadAsPdf}>Download As PDF</button>
       </div>

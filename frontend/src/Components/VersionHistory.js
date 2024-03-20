@@ -48,7 +48,9 @@ function VersionHistory({ projectId,role}) {
         `http://localhost:5000/api/version-history`,
         newVersion
       );
-      setVersionHistory([...versionHistory, newVersion]);
+      const updatedVersionResponse=await axios.get(`http://localhost:5000/api/version-history/${projectId}`);
+
+      setVersionHistory(updatedVersionResponse.data);
       setNewVersion({
         version: "",
         projectId: `${projectId}`,

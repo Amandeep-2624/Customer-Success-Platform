@@ -52,7 +52,9 @@ function AuditHistory({ projectId ,role}) {
         `http://localhost:5000/api/audit-history`,
         newAudit
       );
-      setAuditHistory([...AuditHistory, newAudit]);
+      const updatedAuditsResponse=await axios.get(`http://localhost:5000/api/audit-history/${projectId}`);
+      console.log(`updated audits are ${updatedAuditsResponse.data}`);
+      setAuditHistory(updatedAuditsResponse.data);
       setNewAudit({
         projectId: `${projectId}`,
         DateofAudit: "",
@@ -64,13 +66,14 @@ function AuditHistory({ projectId ,role}) {
         isEditing: false,
       });
 
+      // window.location.reload();
+      
       await axios.post('http://localhost:5000/api/send-email', {
         projectId:{projectId},
         subject: 'New Audit Added',
         text: 'A new audit has been added.',...newAudit
       });
       toast.success("Email sent to Client for new Audit");
-      // window.location.reload();
     } catch (error) {
       console.error("Error saving new version:", error);
     }
@@ -129,7 +132,6 @@ function AuditHistory({ projectId ,role}) {
       });
 
       toast.success("Email sent to Client for updated Audit");
-
       
     } catch (error) {
       console.error("Error updating budget:", error);

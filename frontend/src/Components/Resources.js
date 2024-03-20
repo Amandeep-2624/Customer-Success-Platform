@@ -45,7 +45,9 @@ function Resources({ projectId,role }) {
         `http://localhost:5000/api/resources`,
         newProjectResource
       );
-      setResources([...ProjectResources, newProjectResource]);
+      const updatedResourceResponse=await axios.get(`http://localhost:5000/api/resources/${projectId}`);
+
+      setResources(updatedResourceResponse.data);
       setNewResource({
         projectId: `${projectId}`,
         resourceName: "",

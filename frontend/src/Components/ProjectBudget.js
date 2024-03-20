@@ -43,7 +43,9 @@ function ProjectBudget({ projectId,role }) {
         `http://localhost:5000/api/project-budget`,
         newBudget
       );
-      setProjectBudget([...projectBudget, newBudget]);
+      const updatedProjectBudgetResponse=await axios.get(`http://localhost:5000/api/project-budget/${projectId}`);
+
+      setProjectBudget(updatedProjectBudgetResponse.data);
       setNewBudget({
         projectId: `${projectId}`,
         projectType: "",
@@ -108,7 +110,7 @@ function ProjectBudget({ projectId,role }) {
     <div>
       <div className="top-btns">
       {(role==="Admin"  || role==="Project Manger")  &&( <button className="add-version-btn" onClick={handleAddNewBudget}>
-        Add Audit
+        Add Budget
       </button>)}
       <button className="download-pdf-btn" onClick={handleDownloadAsPdf}>Download As PDF</button>
       </div>

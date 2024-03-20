@@ -48,7 +48,9 @@ function RiskProfile({ projectId,role }) {
         `http://localhost:5000/api/risk-profiles`,
         newRiskProfile
       );
-      setRiskProfile([...RiskProfiles, newRiskProfile]);
+      const updatedRiskResponse=await axios.get(`http://localhost:5000/api/risk-profiles/${projectId}`);
+
+      setRiskProfile(updatedRiskResponse.data);
       setNewRiskProfile({
         projectId: `${projectId}`,
         RiskType: "",

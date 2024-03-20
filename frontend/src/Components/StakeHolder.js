@@ -43,7 +43,9 @@ function StakeHolder({ projectId,role }) {
         `http://localhost:5000/api/stakeholders`,
         newStakeHolder
       );
-      setStakeHolder([...StakeHolders, newStakeHolder]);
+      const updatedStakeHolderResponse=await axios.get(`http://localhost:5000/api/stakeholders/${projectId}`);
+
+      setStakeHolder(updatedStakeHolderResponse.data);
       setNewStakeHolder({
         projectId: `${projectId}`,
         Title: "",

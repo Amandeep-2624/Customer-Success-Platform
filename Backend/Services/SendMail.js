@@ -12,6 +12,10 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: 'amandeeprewani21@gmail.com', // Your email address
         pass: 'iygw uyyl qbrk vbpe'
+    },
+    tls: {
+        // Add this option to accept self-signed certificates
+        rejectUnauthorized: false
     }
 });
 
@@ -28,8 +32,8 @@ router.post('/send-email', async (req, res) => {
         }
         // Extract client email from project details
         const clientEmail = project.clientEmail;
-        
-
+        console.log(clientEmail);
+        console.log(req.body);
 
         const emailBody = `
         Hello StakeHolder
@@ -52,7 +56,8 @@ router.post('/send-email', async (req, res) => {
 
         console.log('Message sent: %s', info.messageId);
         res.status(200).send('Email sent successfully');
-    } catch (error) {
+    } 
+    catch (error) {
         console.error('Error sending email:', error);
         res.status(500).send('Error sending email');
     }

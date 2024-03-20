@@ -42,7 +42,8 @@ function ProjectUpdates({ projectId,role}) {
         `http://localhost:5000/api/project-update`,
         newProjectUpdate
       );
-      setProjectUpdates([...projectUpdates, newProjectUpdate]);
+      const updatedProjectUpdatesResponse=await axios.get(`http://localhost:5000/api/project-update/${projectId}`);
+      setProjectUpdates(updatedProjectUpdatesResponse.data);
       setNewProjectUpdate({
         projectId: `${projectId}`,
         date: "",

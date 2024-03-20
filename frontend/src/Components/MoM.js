@@ -43,7 +43,9 @@ function ClientFeedback({ projectId,role }) {
         `http://localhost:5000/api/mom`,
         newMoM
       );
-      setMoMData([...MoMData, newMoM]);
+      const updatedMoMResponse=await axios.get(`http://localhost:5000/api/mom/${projectId}`);
+
+      setMoMData(updatedMoMResponse.data);
       setNewMoM({
         projectId: `${projectId}`,
         date: "",
