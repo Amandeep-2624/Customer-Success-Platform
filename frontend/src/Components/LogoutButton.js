@@ -11,13 +11,12 @@ const LogoutButton = ({role}) => {
     isAuthenticated &&(
         <div className="credentials">
             <div className="userimg">
-                <span>{user.name}</span>
                 <img src={user.picture}/>
                 
             </div>
             <div className="authentication">
-                
-                <span>{role}</span>
+                <span className="user-name">{user.name}</span>
+                <span className="user-role">{role}</span>
             <button className="logout-btn" onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
             Log Out
             </button>

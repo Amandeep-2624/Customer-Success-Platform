@@ -5,7 +5,13 @@
     gap: 15px;
     /* padding: 2px; */
   }
-  
+  .user-name{
+    font-weight: bold;
+  }
+  .user-role{
+    font-size: 15px;
+    color: grey;
+  }
   .userimg {
     /* border-radius: 50%; */
     display: flex;
@@ -33,7 +39,7 @@
     color: #fff; /* Button text color */
     border: none;
     border-radius: 5px;
-    padding: 5px 5px;
+    padding: 4px 5px;
     cursor: pointer;
     margin-bottom: 5px;
     /* margin-top: 6px; */
