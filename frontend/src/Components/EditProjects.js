@@ -31,7 +31,6 @@ myHeaders.append(
 const tabs = [
   "Scope & Stacks",
   "Project Budget",
-  "Project Overview",
   "Audit History",
   "Version History",
   "Escalation Matrix",
@@ -39,6 +38,7 @@ const tabs = [
   "Risk Profile",
   "Phases",
   "Sprint",
+  "Project Overview",
   "Approved Teams",
   "Resources",
   "ClientFeedback",
@@ -64,9 +64,6 @@ function EditProjects() {
     redirect: "follow",
   };
   const { user, isAuthenticated, isLoading } = useAuth0();
-  if (!isLoading && isAuthenticated && user) {
-    console.log(`in navbar ${user.sub}`);
-  }
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -99,9 +96,9 @@ function EditProjects() {
       <Tabs tabs={tabs} activetab={activetab} setActiveTabs={setActiveTabs} />
       <hr />
       <div>
-                {
-                    activetab==='Project Overview' && <ProjectOverview projectId={projectId}/>
-                }
+        {activetab === "Project Overview" && (
+          <ProjectOverview projectId={projectId} />
+        )}
         {activetab === "Scope & Stacks" && (
           <ScopeAndStack projectId={projectId} role={role} />
         )}
@@ -117,16 +114,22 @@ function EditProjects() {
         {activetab === "Project Budget" && (
           <ProjectBudget projectId={projectId} role={role} />
         )}
-        {activetab === "Stake Holders" && <StakeHolder projectId={projectId} role={role}/>}
-        {activetab === "Risk Profile" && <RiskProfile projectId={projectId} role={role} />}
-        {activetab === "Phases" && <Phases projectId={projectId} role={role}/>}
+        {activetab === "Stake Holders" && (
+          <StakeHolder projectId={projectId} role={role} />
+        )}
+        {activetab === "Risk Profile" && (
+          <RiskProfile projectId={projectId} role={role} />
+        )}
+        {activetab === "Phases" && <Phases projectId={projectId} role={role} />}
         {activetab === "Sprint" && <Sprint projectId={projectId} role={role} />}
         {activetab === "Approved Teams" && (
-          <ApprovedTeams projectId={projectId} role={role}/>
+          <ApprovedTeams projectId={projectId} role={role} />
         )}
-        {activetab === "Resources" && <Resources projectId={projectId}role={role} />}
+        {activetab === "Resources" && (
+          <Resources projectId={projectId} role={role} />
+        )}
         {activetab === "ClientFeedback" && (
-          <ClientFeedback projectId={projectId} role={role}/>
+          <ClientFeedback projectId={projectId} role={role} />
         )}
         {activetab === "ProjectUpdates" && (
           <ProjectUpdates projectId={projectId} role={role} />

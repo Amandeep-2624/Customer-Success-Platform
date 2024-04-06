@@ -4,9 +4,7 @@ import "../Styles/LogoutButton.css"
 
 const LogoutButton = ({role}) => {
   const { logout,user,isAuthenticated } = useAuth0();
-  // if(isAuthenticated){
-  // console.log(`USER id is ${user.sub}`);
-  // }
+  
   return (
     isAuthenticated &&(
         <div className="credentials">
