@@ -25,7 +25,7 @@ exports.GetProjectOverview=async (req, res) => {
       const projectOverview = await ProjectOverview.find({ projectId: req.params.projectId});
       res.json(projectOverview);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -43,7 +43,7 @@ exports.DeleteProjectOverview= async (req, res) => {
     await ScopeandStack.findByIdAndDelete(req.params.id);
     res.json({ message: 'Project scope deleted' });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(400).json({ message: err.message });
   }
 }
 

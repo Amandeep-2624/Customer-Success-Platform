@@ -25,7 +25,7 @@ exports.GetAudit=async (req, res) => {
       const auditHistory = await AuditHistory.find({ projectId: req.params.projectId });
       res.json(auditHistory);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -43,6 +43,6 @@ exports.DeleteAudit=async (req, res) => {
       await AuditHistory.findByIdAndDelete(req.params.id);
       res.json({ message: 'Audit history entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

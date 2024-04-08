@@ -17,12 +17,14 @@ function ProjectBudget({ projectId,role }) {
 
   const [editBudgetData, setEditBudgetData] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     const fetchBudgetHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/project-budget/${projectId}`
+          `${BASE_URL}/project-budget/${projectId}`
         );
         setProjectBudget(response.data);
       } catch (error) {
@@ -40,10 +42,10 @@ function ProjectBudget({ projectId,role }) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/project-budget`,
+        `${BASE_URL}/project-budget`,
         newBudget
       );
-      const updatedProjectBudgetResponse=await axios.get(`http://localhost:5000/api/project-budget/${projectId}`);
+      const updatedProjectBudgetResponse=await axios.get(`${BASE_URL}/project-budget/${projectId}`);
 
       setProjectBudget(updatedProjectBudgetResponse.data);
       setNewBudget({
@@ -67,7 +69,7 @@ function ProjectBudget({ projectId,role }) {
   // deleting a version data from table
   const deleteBudget = async (auditId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/project-budget/${auditId}`);
+      await axios.delete(`${BASE_URL}/project-budget/${auditId}`);
       // Remove the deleted project from the project list
       setProjectBudget(projectBudget.filter((budget) => budget._id !== auditId));
     } catch (error) {
@@ -92,7 +94,7 @@ function ProjectBudget({ projectId,role }) {
   const handleUpdateBudget = async (updatedBudget) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/project-budget/${updatedBudget._id}`,
+        `${BASE_URL}/project-budget/${updatedBudget._id}`,
         updatedBudget
       );
       const updatedBudgets = projectBudget.map((budget) =>

@@ -25,7 +25,7 @@ exports.GetVersionHistory=async (req, res) => {
       const versionHistory = await VersionHistory.find({ projectId: req.params.projectId });
       res.json(versionHistory);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -43,6 +43,6 @@ exports.DeleteVersionHistory=async (req, res) => {
       await VersionHistory.findByIdAndDelete(req.params.id);
       res.json({ message: 'Version history entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

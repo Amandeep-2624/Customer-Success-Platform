@@ -16,12 +16,15 @@ function ProjectUpdates({ projectId,role}) {
 
   const [editProjectUpdate, setEditProjectUpdate] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     const fetchProjectUpdates = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/project-update/${projectId}`
+          `${BASE_URL}/project-update/${projectId}`
         );
         setProjectUpdates(response.data);
       } catch (error) {
@@ -39,10 +42,10 @@ function ProjectUpdates({ projectId,role}) {
   const handleSaveNewProjectUpdate = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/project-update`,
+        `${BASE_URL}/project-update`,
         newProjectUpdate
       );
-      const updatedProjectUpdatesResponse=await axios.get(`http://localhost:5000/api/project-update/${projectId}`);
+      const updatedProjectUpdatesResponse=await axios.get(`${BASE_URL}/project-update/${projectId}`);
       setProjectUpdates(updatedProjectUpdatesResponse.data);
       setNewProjectUpdate({
         projectId: `${projectId}`,
@@ -64,7 +67,7 @@ function ProjectUpdates({ projectId,role}) {
   // deleting a version data from table
   const deleteProjectUpdate = async (UpdateId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/project-update/${UpdateId}`);
+      await axios.delete(`${BASE_URL}/project-update/${UpdateId}`);
       // Remove the deleted project from the project list
       setProjectUpdates(projectUpdates.filter((update) => update._id !== UpdateId));
     } catch (error) {
@@ -88,7 +91,7 @@ function ProjectUpdates({ projectId,role}) {
   const handleUpdateProjectUpdates = async (updatedProjectUpdate) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/project-update/${updatedProjectUpdate._id}`,
+        `${BASE_URL}/project-update/${updatedProjectUpdate._id}`,
         updatedProjectUpdate
       );
       const updatedProjectUpdates = projectUpdates.map((update) =>

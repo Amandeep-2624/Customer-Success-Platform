@@ -21,7 +21,7 @@ exports.GetStakeHolders=async (req, res) => {
       const stakeholders = await StakeHolders.find({ projectId: req.params.projectId });
       res.json(stakeholders);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -39,6 +39,6 @@ exports.DeleteStakeHolder=async (req, res) => {
       await StakeHolders.findByIdAndDelete(req.params.id);
       res.json({ message: 'Stakeholder entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

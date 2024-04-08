@@ -11,12 +11,15 @@ function ProjectOverview({ projectId }) {
     Objectives: '',
     Budget: ''
   });
+  
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   // Fetch existing project overview data when component mounts
   useEffect(() => {
     const fetchProjectOverview = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/project-scope/overview/${projectId}`);
+        const response = await axios.get(`${BASE_URL}/project-scope/overview/${projectId}`);
         if (response.data.length > 0) {
           const { brief, Purpose, Goals, Objectives, Budget } = response.data[0];
           setFormData({ brief, Purpose, Goals, Objectives, Budget });
@@ -37,7 +40,7 @@ function ProjectOverview({ projectId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:5000/api/project-scope/overview/${projectId}`, formData);
+      const response = await axios.put(`${BASE_URL}/project-scope/overview/${projectId}`, formData);
       if (response.status === 200) {
         alert('Project overview updated successfully!');
       } else {

@@ -22,7 +22,7 @@ exports.GetSprintDetails=async (req, res) => {
       const sprints = await SprintDetails.find({ projectId: req.params.projectId });
       res.json(sprints);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -34,7 +34,7 @@ exports.GetSprintById=async (req, res) => {
       }
       res.json(sprint);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -56,6 +56,6 @@ exports.DeleteSprintDetail=async (req, res) => {
       await SprintDetails.findByIdAndDelete(req.params.id);
       res.json({ message: 'sprint entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

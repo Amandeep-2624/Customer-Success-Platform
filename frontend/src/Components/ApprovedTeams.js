@@ -13,11 +13,14 @@ function ApprovedTeams({ projectId,role }) {
     duration: "",
   });
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   useEffect(() => {
     const fetchApprovedTeams = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/approved-team/${projectId}`
+          `${BASE_URL}/approved-team/${projectId}`
         );
         setApprovedTeams(response.data);
       } catch (error) {
@@ -37,7 +40,7 @@ function ApprovedTeams({ projectId,role }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/approved-team",
+        `${BASE_URL}/approved-team`,
         formData
       );
       console.log("Data added successfully:", response.data);
@@ -56,7 +59,7 @@ function ApprovedTeams({ projectId,role }) {
 
   const DeleteApprovedTeam = async (teamId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/approved-team/${teamId}`);
+      await axios.delete(`${BASE_URL}/approved-team/${teamId}`);
       // Remove the deleted project from the project list
       setApprovedTeams(approvedTeams.filter((Team) => Team._id !== teamId));
     } catch (error) {

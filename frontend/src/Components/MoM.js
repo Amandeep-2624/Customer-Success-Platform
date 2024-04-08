@@ -14,12 +14,13 @@ function ClientFeedback({ projectId,role }) {
     comments: "",
     isEditing: false,
   });
+  const BASE_URL=process.env.REACT_APP_BASE_URL
 
   useEffect(() => { 
     const fetchClientMoM = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/mom/${projectId}`
+          `${BASE_URL}/mom/${projectId}`
         );
         setMoMData(response.data);
       } catch (error) {
@@ -40,10 +41,10 @@ function ClientFeedback({ projectId,role }) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/mom`,
+        `${BASE_URL}/mom`,
         newMoM
       );
-      const updatedMoMResponse=await axios.get(`http://localhost:5000/api/mom/${projectId}`);
+      const updatedMoMResponse=await axios.get(`${BASE_URL}/mom/${projectId}`);
 
       setMoMData(updatedMoMResponse.data);
       setNewMoM({
@@ -55,7 +56,7 @@ function ClientFeedback({ projectId,role }) {
         isEditing: false,
       });
 
-      await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post('${BASE_URL}/send-email', {
         subject: 'New MoM Added',
         text: 'A new MoM has been added.',...newMoM
       });
@@ -74,7 +75,7 @@ function ClientFeedback({ projectId,role }) {
   // deleting a version data from table
   const deleteMoM = async (momId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/mom/${momId}`);
+      await axios.delete(`${BASE_URL}/mom/${momId}`);
       // Remove the deleted project from the project list
       setMoMData(MoMData.filter((moms) => moms._id !== momId));
     } catch (error) {

@@ -22,17 +22,20 @@ function AuditHistory({ projectId ,role}) {
 
   const [editAudit, setEditAudit] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+  console.log("base url is",BASE_URL);
 
 
   useEffect(() => { 
     const fetchAuditHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/audit-history/${projectId}`
+          `${BASE_URL}/audit-history/${projectId}`
         );
         setAuditHistory(response.data);
       } catch (error) {
-        console.error("Error fetching version history:", error);
+        console.error("Error fetching audit history:", error);
       }
     };
 
@@ -49,10 +52,10 @@ function AuditHistory({ projectId ,role}) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/audit-history`,
+        `${BASE_URL}/audit-history`,
         newAudit
       );
-      const updatedAuditsResponse=await axios.get(`http://localhost:5000/api/audit-history/${projectId}`);
+      const updatedAuditsResponse=await axios.get(`${BASE_URL}/audit-history/${projectId}`);
       console.log(`updated audits are ${updatedAuditsResponse.data}`);
       setAuditHistory(updatedAuditsResponse.data);
       setNewAudit({
@@ -68,7 +71,7 @@ function AuditHistory({ projectId ,role}) {
 
       // window.location.reload();
       
-      await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post(`${BASE_URL}/send-email`, {
         projectId:{projectId},
         subject: 'New Audit Added',
         text: 'A new audit has been added.',...newAudit
@@ -89,7 +92,7 @@ function AuditHistory({ projectId ,role}) {
   // deleting a version data from table
   const deleteAudit = async (auditId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/audit-history/${auditId}`);
+      await axios.delete(`${BASE_URL}/audit-history/${auditId}`);
       // Remove the deleted project from the project list
       setAuditHistory(AuditHistory.filter((Audit) => Audit._id !== auditId));
     } catch (error) {
@@ -117,7 +120,7 @@ function AuditHistory({ projectId ,role}) {
   const handleUpdateAudit = async (updatedAudit) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/audit-history/${updatedAudit._id}`,
+        `${BASE_URL}/audit-history/${updatedAudit._id}`,
         updatedAudit
       );
       const updatedAudits = AuditHistory.map((audit) =>
@@ -125,7 +128,7 @@ function AuditHistory({ projectId ,role}) {
       );
       setAuditHistory(updatedAudits);
       setShowEditModal(false);
-      await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post(`${BASE_URL}/send-email`, {
         projectId:{projectId},
         subject: 'Audit Updated',
         text: 'A audit has been Updates.',...updatedAudit

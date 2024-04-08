@@ -18,11 +18,14 @@ function StakeHolder({ projectId,role }) {
   const [editStakeHolder, setEditStakeHolder] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   useEffect(() => {
     const fetchBudgetHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/stakeholders/${projectId}`
+          `${BASE_URL}/stakeholders/${projectId}`
         );
         setStakeHolder(response.data);
       } catch (error) {
@@ -40,10 +43,10 @@ function StakeHolder({ projectId,role }) {
   const handleSaveNewStakeHolder = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/stakeholders`,
+        `${BASE_URL}/stakeholders`,
         newStakeHolder
       );
-      const updatedStakeHolderResponse=await axios.get(`http://localhost:5000/api/stakeholders/${projectId}`);
+      const updatedStakeHolderResponse=await axios.get(`${BASE_URL}/stakeholders/${projectId}`);
 
       setStakeHolder(updatedStakeHolderResponse.data);
       setNewStakeHolder({
@@ -67,7 +70,7 @@ function StakeHolder({ projectId,role }) {
   // deleting a version data from table
   const deleteStakeHolder = async (auditId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/stakeholders/${auditId}`);
+      await axios.delete(`${BASE_URL}/stakeholders/${auditId}`);
       // Remove the deleted project from the project list
       setStakeHolder(StakeHolders.filter((budget) => budget._id !== auditId));
     } catch (error) {
@@ -92,7 +95,7 @@ function StakeHolder({ projectId,role }) {
   const handleUpdateStakeHolder = async (updatedStake) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/stakeholders/${updatedStake._id}`,
+        `${BASE_URL}/stakeholders/${updatedStake._id}`,
         updatedStake
       );
       const updatedStakeHolder = StakeHolders.map((stake) =>

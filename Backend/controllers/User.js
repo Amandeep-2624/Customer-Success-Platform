@@ -20,20 +20,19 @@ exports.GetUsers=async (req, res) => {
       const users = await User.find({ role: req.params.role });
       res.json(users);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
-exports.GetUserById=async function getUser(req, res, next) {
+exports.GetUserById=async (req, res)=>{
     try {
       const user = await User.findById(req.params.id);
       if (user == null) {
-        return res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'User not found' });
       }
-      res.user = user;
-      next();
+      res.json(user);
     } catch (err) {
-      return res.status(500).json({ message: err.message });
+      return res.status(400).json({ message: err.message });
     }
 }
 

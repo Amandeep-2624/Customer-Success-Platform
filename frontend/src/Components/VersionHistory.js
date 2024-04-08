@@ -23,11 +23,14 @@ function VersionHistory({ projectId,role}) {
   const [editVersion, setEditVersion] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   useEffect(() => {
     const fetchVersionHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/version-history/${projectId}`
+          `${BASE_URL}/version-history/${projectId}`
         );
         setVersionHistory(response.data);
       } catch (error) {
@@ -45,10 +48,10 @@ function VersionHistory({ projectId,role}) {
   const handleSaveNewVersion = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/version-history`,
+        `${BASE_URL}/version-history`,
         newVersion
       );
-      const updatedVersionResponse=await axios.get(`http://localhost:5000/api/version-history/${projectId}`);
+      const updatedVersionResponse=await axios.get(`${BASE_URL}/version-history/${projectId}`);
 
       setVersionHistory(updatedVersionResponse.data);
       setNewVersion({
@@ -78,7 +81,7 @@ function VersionHistory({ projectId,role}) {
   const deleteVersion = async (versionId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/version-history/${versionId}`
+        `${BASE_URL}/version-history/${versionId}`
       );
       // Remove the deleted project from the project list
       setVersionHistory(
@@ -111,7 +114,7 @@ function VersionHistory({ projectId,role}) {
   const handleUpdateVersion = async (updatedVersion) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/version-history/${updatedVersion._id}`,
+        `${BASE_URL}/version-history/${updatedVersion._id}`,
         updatedVersion
       );
       const updatedVersions = versionHistory.map((Version) =>

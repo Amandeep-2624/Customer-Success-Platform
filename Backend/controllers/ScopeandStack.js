@@ -21,7 +21,7 @@ exports.GetScopeandStacks=async (req, res) => {
       const projectScopes = await ScopeandStack.find({ projectId: req.params.projectId});
       res.json(projectScopes);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -33,7 +33,7 @@ exports.GetScopeandStackById=async (req, res) => {
       }
       res.json(projectBudget);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -51,7 +51,7 @@ exports.DeleteScopeandStack=async (req, res) => {
       await ScopeandStack.findByIdAndDelete(req.params.id);
       res.json({ message: 'Project scope deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 

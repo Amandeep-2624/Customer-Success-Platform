@@ -10,11 +10,13 @@ function ProjectList() {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5000/api/projects")
+      .get(`${BASE_URL}/projects`)
       .then((response) => {
         // console.log("Data",response.data);
         setProjects(response.data);
@@ -29,7 +31,7 @@ function ProjectList() {
   // Function to delete a project
   const deleteProject = async (projectId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/projects/${projectId}`);
+      await axios.delete(`${BASE_URL}/projects/${projectId}`);
       // Remove the deleted project from the project list
       setProjects(projects.filter((project) => project._id !== projectId));
     } catch (error) {

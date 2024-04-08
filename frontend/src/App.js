@@ -15,6 +15,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import EditProjects from './Components/EditProjects';
 
+
+
+
 function App() {
   const {isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
   useEffect(() => {

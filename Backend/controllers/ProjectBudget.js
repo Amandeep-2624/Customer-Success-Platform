@@ -21,7 +21,7 @@ exports.GetProjectBudget=async (req, res) => {
       const projectBudgets = await ProjectBudget.find({ projectId: req.params.projectId});
       res.json(projectBudgets);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -39,7 +39,7 @@ exports.DeleteProjectBudget=async (req, res) => {
       await ProjectBudget.findByIdAndDelete(req.params.id);
       res.json({ message: 'Project budget deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 

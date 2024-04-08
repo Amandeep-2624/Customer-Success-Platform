@@ -6,11 +6,14 @@ function ScopeAndStack({ projectId }) {
   const [projectTech, setProjectTech] = useState('');
   const [projectScope, setProjectScope] = useState('');
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   // Fetch existing project scope and stack data when component mounts
   useEffect(() => {
     const fetchProjectScope = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/project-scope/${projectId}`);
+        const response = await axios.get(`${BASE_URL}/project-scope/${projectId}`);
         if (response.data.length > 0) {
             console.log(response.data);
           const { projectStack, projectScope } = response.data[0];
@@ -29,7 +32,7 @@ function ScopeAndStack({ projectId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/api/project-scope/${projectId}`, { projectStack: projectTech, projectScope });
+      await axios.put(`${BASE_URL}/project-scope/${projectId}`, { projectStack: projectTech, projectScope });
       alert('Project scope updated successfully');
     } catch (error) {
       console.error('Error updating project scope:', error);

@@ -5,7 +5,7 @@ exports.GetProjects= async (req,res)=>{
         const projects = await Project.find();
         res.send(projects);
       } catch (err) {
-        res.status(500).json({ message: err.message });
+        res.status(400).json({ message: err.message });
       }
 }
 
@@ -38,7 +38,7 @@ exports.GetProjectById=async (req, res) => {
       }
       res.json(project);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -56,6 +56,6 @@ exports.DeleteProject=async (req, res) => {
       await Project.findByIdAndDelete(req.params.id);
       res.json({ message: 'Project deleted successfully' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

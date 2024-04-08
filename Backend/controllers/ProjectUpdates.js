@@ -20,7 +20,7 @@ exports.GetProjectUpdates= async (req, res) => {
       const update = await ProjectUpdate.find({ projectId });
       res.json(update);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -38,6 +38,6 @@ exports.DeleteProjectUpdates=async (req, res) => {
       await ProjectUpdate.findByIdAndDelete(req.params.id);
       res.json({ message: 'Phase deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

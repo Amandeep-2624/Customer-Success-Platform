@@ -21,12 +21,15 @@ function Phases({ projectId,role }) {
 
   const [editPhases, setEditPhases] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     const fetchProjectPhases = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/phases/${projectId}`
+          `${BASE_URL}/phases/${projectId}`
         );
         setPhase(response.data);
       } catch (error) {
@@ -44,10 +47,10 @@ function Phases({ projectId,role }) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/phases`,
+        `${BASE_URL}/phases`,
         newProjectPhase
       );
-      const updatedPhaseResponse=await axios.get(`http://localhost:5000/api/phases/${projectId}`);
+      const updatedPhaseResponse=await axios.get(`${BASE_URL}/phases/${projectId}`);
 
       setPhase(updatedPhaseResponse.data);
       setNewPhase({
@@ -75,7 +78,7 @@ function Phases({ projectId,role }) {
   // deleting a version data from table
   const deletePhase = async (phaseId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/phases/${phaseId}`);
+      await axios.delete(`${BASE_URL}/phases/${phaseId}`);
       // Remove the deleted project from the project list
       setPhase(ProjectPhases.filter((Audit) => Audit._id !== phaseId));
     } catch (error) {
@@ -105,7 +108,7 @@ function Phases({ projectId,role }) {
   const handleUpdatePhase = async (updatedPhase) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/phases/${updatedPhase._id}`,
+        `${BASE_URL}/phases/${updatedPhase._id}`,
         updatedPhase
       );
       const updatedPhases = ProjectPhases.map((Phase) =>

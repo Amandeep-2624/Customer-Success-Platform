@@ -21,7 +21,7 @@ exports.GetMoM=async (req, res) => {
       const mom = await MoM.find({ projectId: req.params.projectId });
       res.json(mom);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -30,6 +30,6 @@ exports.DeleteMoM=async (req, res) => {
       await MoM.findByIdAndDelete(req.params.id);
       res.json({ message: 'MoM entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

@@ -10,12 +10,14 @@ function EscalationMatrix({ projectId, role }) {
     escaltionLevel: "",
     role: "",
   });
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   useEffect(() => {
     const fetchEscalationData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/escalation-matrix/${projectId}`
+          `${BASE_URL}/escalation-matrix/${projectId}`
         );
         setEscalationData(response.data);
       } catch (error) {
@@ -35,7 +37,7 @@ function EscalationMatrix({ projectId, role }) {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/escalation-matrix",
+        "${BASE_URL}/escalation-matrix",
         newEscalation
       );
       setEscalationData([...escalationData, response.data]);
@@ -53,7 +55,7 @@ function EscalationMatrix({ projectId, role }) {
   const deleteEscalation = async (escId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/api/escalation-matrix/${escId}`
+        `${BASE_URL}/escalation-matrix/${escId}`
       );
       // Remove the deleted project from the project list
       setEscalationData(escalationData.filter((esc) => esc._id !== escId));

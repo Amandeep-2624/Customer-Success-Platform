@@ -24,7 +24,7 @@ exports.GetProjectResources=async (req, res) => {
       const resources = await Resources.find({ projectId: req.params.projectId });
       res.json(resources);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -42,6 +42,6 @@ exports.DeleteProjectResource= async (req, res) => {
       await Resources.findByIdAndDelete(req.params.id);
       res.json({ message: 'Project Resource entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

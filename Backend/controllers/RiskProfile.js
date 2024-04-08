@@ -24,7 +24,7 @@ exports.GetRiskProfiles=async (req, res) => {
       const riskProfile = await RiskProfile.find({ projectId: req.params.projectId });
       res.json(riskProfile);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -36,7 +36,7 @@ exports.GetRiskProfileById=async (req, res) => {
       }
       res.json(riskProfile);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -54,7 +54,7 @@ exports.DeleteRiskProfile=async (req, res) => {
       await RiskProfile.findByIdAndDelete(req.params.id);
       res.json({ message: 'Risk profile deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 

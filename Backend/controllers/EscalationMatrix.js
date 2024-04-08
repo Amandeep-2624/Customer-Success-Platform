@@ -21,7 +21,7 @@ exports.GetEscalation=async (req, res) => {
       const escaltionMatrix = await EscalationMatrix.find({ projectId: req.params.projectId });
       res.json(escaltionMatrix);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -39,7 +39,7 @@ exports.DeleteEscalation= async (req, res) => {
       await EscalationMatrix.findByIdAndDelete(req.params.id);
       res.json({ message: 'Audit history entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 

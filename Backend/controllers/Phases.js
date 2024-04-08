@@ -25,7 +25,7 @@ exports.GetPhases=async (req, res) => {
       const phases = await Phases.find({ projectId });
       res.json(phases);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -37,7 +37,7 @@ exports.GetPhase=async (req, res) => {
       }
       res.json(phase);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -55,6 +55,6 @@ exports.DeletePhase= async (req, res) => {
       await Phases.findByIdAndDelete(req.params.id);
       res.json({ message: 'Phase deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

@@ -22,12 +22,15 @@ function RiskProfile({ projectId,role }) {
   const [editRisk, setEditRisk] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
 
   useEffect(() => {
     const fetchAuditHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/risk-profiles/${projectId}`
+          `${BASE_URL}/risk-profiles/${projectId}`
         );
         setRiskProfile(response.data);
       } catch (error) {
@@ -45,10 +48,10 @@ function RiskProfile({ projectId,role }) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/risk-profiles`,
+        `${BASE_URL}/risk-profiles`,
         newRiskProfile
       );
-      const updatedRiskResponse=await axios.get(`http://localhost:5000/api/risk-profiles/${projectId}`);
+      const updatedRiskResponse=await axios.get(`${BASE_URL}/risk-profiles/${projectId}`);
 
       setRiskProfile(updatedRiskResponse.data);
       setNewRiskProfile({
@@ -75,7 +78,7 @@ function RiskProfile({ projectId,role }) {
   // deleting a version data from table
   const deleteRisk = async (RiskId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/risk-profiles/${RiskId}`);
+      await axios.delete(`${BASE_URL}/risk-profiles/${RiskId}`);
       // Remove the deleted project from the project list
       setRiskProfile(RiskProfiles.filter((risk) => risk._id !== RiskId));
     } catch (error) {
@@ -104,7 +107,7 @@ function RiskProfile({ projectId,role }) {
   const handleUpdateRisk = async (updatedRisk) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/risk-profiles/${updatedRisk._id}`,
+        `${BASE_URL}/risk-profiles/${updatedRisk._id}`,
         updatedRisk
       );
       const updatedRiskProfile = RiskProfiles.map((risk) =>

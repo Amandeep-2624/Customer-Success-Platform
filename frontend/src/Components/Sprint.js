@@ -16,11 +16,14 @@ function Sprint({ projectId,role }) {
     isEditing: false
   });
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   useEffect(() => {
     const fetchAuditHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/sprints/${projectId}`
+          `${BASE_URL}/sprints/${projectId}`
         );
         setSprintHistory(response.data);
       } catch (error) {
@@ -38,10 +41,10 @@ function Sprint({ projectId,role }) {
   const handleSaveNewSprint = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/sprints`,
+        `${BASE_URL}/sprints`,
         newSprint
       );
-      const updatedSprintResponse=await axios.get(`http://localhost:5000/api/sprints/${projectId}`);
+      const updatedSprintResponse=await axios.get(`${BASE_URL}/sprints/${projectId}`);
 
       setSprintHistory(updatedSprintResponse.data);
       setNewSprint({
@@ -66,7 +69,7 @@ function Sprint({ projectId,role }) {
   // deleting a version data from table
   const deleteSprint = async (sprintId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/sprints/${sprintId}`);
+      await axios.delete(`${BASE_URL}/sprints/${sprintId}`);
       // Remove the deleted project from the project list
       setSprintHistory(SprintHistory.filter((sprint) => sprint._id !== sprintId));
     } catch (error) {

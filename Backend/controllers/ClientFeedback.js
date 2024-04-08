@@ -23,7 +23,7 @@ exports.GetClientFeedback =async (req, res) => {
       const clientFeedback = await ClientFeedback.find({ projectId: req.params.projectId });
       res.json(clientFeedback);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -41,6 +41,6 @@ exports.DeleteClientFeedback= async (req, res) => {
       await ClientFeedback.findByIdAndDelete(req.params.id);
       res.json({ message: 'client feedback entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

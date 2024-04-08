@@ -20,11 +20,14 @@ function Resources({ projectId,role }) {
   const [editResources, setEditResources] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
+
   useEffect(() => {
     const fetchProjectResources = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/resources/${projectId}`
+          `${BASE_URL}/resources/${projectId}`
         );
         setResources(response.data);
       } catch (error) {
@@ -42,10 +45,10 @@ function Resources({ projectId,role }) {
   const handleSaveNewResource = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/resources`,
+        `${BASE_URL}/resources`,
         newProjectResource
       );
-      const updatedResourceResponse=await axios.get(`http://localhost:5000/api/resources/${projectId}`);
+      const updatedResourceResponse=await axios.get(`${BASE_URL}/resources/${projectId}`);
 
       setResources(updatedResourceResponse.data);
       setNewResource({
@@ -71,7 +74,7 @@ function Resources({ projectId,role }) {
   // deleting a resource data from table
   const deleteResource = async (resourceId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/resources/${resourceId}`);
+      await axios.delete(`${BASE_URL}/resources/${resourceId}`);
       // Remove the deleted project from the project list
       setResources(ProjectResources.filter((resource) => resource._id !== resourceId));
     } catch (error) {
@@ -99,7 +102,7 @@ function Resources({ projectId,role }) {
   const handleUpdateResource = async (updatedResource) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/resources/${updatedResource._id}`,
+        `${BASE_URL}/resources/${updatedResource._id}`,
         updatedResource
       );
       const updatedResources = ProjectResources.map((resource) =>

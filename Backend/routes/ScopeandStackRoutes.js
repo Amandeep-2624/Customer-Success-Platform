@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {CreateScopeandStack,GetScopeandStacks,GetScopeandStackById,UpdateScopeandStcak}=require("../controllers/RiskProfile");
+const {CreateScopeandStack,GetScopeandStacks,GetScopeandStackById,UpdateScopeandStcak,DeleteScopeandStack}=require("../controllers/ScopeandStack");
 // Create project scope and stack
 router.post('/project-scope',CreateScopeandStack);
 

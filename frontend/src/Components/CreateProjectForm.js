@@ -14,6 +14,8 @@ function CreateProjectForm() {
     totalBudget: '',
     projectMembers: 0
   });
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
   const navigate = useNavigate();
 
@@ -41,7 +43,7 @@ function CreateProjectForm() {
     e.preventDefault();
     console.log(formData);
     try {
-      await axios.post('http://localhost:5000/api/projects', formData);
+      await axios.post(`${BASE_URL}/projects`, formData);
       navigate('/');
     } catch (error) {
       console.error('Error creating project:', error);

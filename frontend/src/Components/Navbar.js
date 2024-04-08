@@ -3,7 +3,7 @@ import React,{useContext, useEffect, useState} from "react";
 import '../Styles/Navbar.css';
 import LoginButton from "./LoginButton";
 import LogoutButton from "./LogoutButton";
-import logoCSP from "../Assets/logo-CSP.png";
+
 import { User, useAuth0 } from "@auth0/auth0-react";
 var myHeaders = new Headers();
 myHeaders.append("Accept", "application/json");
@@ -50,7 +50,7 @@ function Navbar() {
     return ( 
         <nav className="Navbar">
             <div className="logo">
-                <img className="Csp-Logo" src={logoCSP}/>
+                <img className="Csp-Logo" src="/logo-CSP.png"/>
                 <h2 className="Heading">Customer <br/>support</h2>
             </div>
             
@@ -62,7 +62,6 @@ function Navbar() {
                 <LoginButton/>
                 <LogoutButton role={role}/>
             </div>
-            {/* <Search className="Searchbar" placeholder="search" /> */}
         </nav>
     );
 }

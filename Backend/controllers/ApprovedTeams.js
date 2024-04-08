@@ -23,7 +23,7 @@ exports.GetAppovedTeam=async (req, res) => {
       const approvedTeam = await ApprovedTeam.find({ projectId: req.params.projectId });
       res.json(approvedTeam);
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }
 
@@ -41,6 +41,6 @@ exports.DeleteApprovedTeam= async (req, res) => {
       await ApprovedTeam.findByIdAndDelete(req.params.id);
       res.json({ message: 'Approved Team entry deleted' });
     } catch (err) {
-      res.status(500).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
 }

@@ -19,13 +19,15 @@ function ClientFeedback({ projectId,role}) {
 
   const [editAudit, setEditAudit] = useState(null);
   const [showEditModal, setShowEditModal] = useState(false);
+  const BASE_URL=process.env.REACT_APP_BASE_URL
+
 
 
   useEffect(() => { 
     const fetchAuditHistory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/client-feedback/${projectId}`
+          `${BASE_URL}/client-feedback/${projectId}`
         );
         setClientFeedback(response.data);
       } catch (error) {
@@ -46,10 +48,10 @@ function ClientFeedback({ projectId,role}) {
   const handleSaveNewAudit = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/client-feedback`,
+        `${BASE_URL}/client-feedback`,
         newFeedback
       );
-      const updatedClientResponse=await axios.get(`http://localhost:5000/api/client-feedback/${projectId}`);
+      const updatedClientResponse=await axios.get(`${BASE_URL}/client-feedback/${projectId}`);
 
       setClientFeedback(updatedClientResponse.data);
       setNewFeedback({
@@ -62,7 +64,7 @@ function ClientFeedback({ projectId,role}) {
         isEditing: false,
       });
 
-      await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post('${BASE_URL}/send-email', {
         subject: 'New Audit Added',
         text: 'A new audit has been added.',...newFeedback
       });
@@ -81,7 +83,7 @@ function ClientFeedback({ projectId,role}) {
   // deleting a version data from table
   const deleteAudit = async (auditId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/client-feedback/${auditId}`);
+      await axios.delete(`${BASE_URL}/client-feedback/${auditId}`);
       // Remove the deleted project from the project list
       setClientFeedback(ClientFeedback.filter((Audit) => Audit._id !== auditId));
     } catch (error) {
@@ -110,7 +112,7 @@ function ClientFeedback({ projectId,role}) {
   const handleUpdateFeedback = async (updatedAudit) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/client-feedback/${updatedAudit._id}`,
+        `${BASE_URL}/client-feedback/${updatedAudit._id}`,
         updatedAudit
       );
       const updatedAudits = ClientFeedback.map((audit) =>
