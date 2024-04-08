@@ -41,7 +41,6 @@ function CreateProjectForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       await axios.post(`${BASE_URL}/projects`, formData);
       navigate('/');

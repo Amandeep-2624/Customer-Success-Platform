@@ -23,8 +23,6 @@ import ProjectOverview from "./ProjectOverview";
 var myHeaders = new Headers();
 const AUTH0_TOKEN=process.env.REACT_APP_AUTH0_TOKEN
 
-console.log("in edit p",AUTH0_TOKEN);
-
 myHeaders.append("Accept", "application/json");
 myHeaders.append(
   "Authorization",

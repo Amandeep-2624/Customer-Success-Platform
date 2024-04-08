@@ -5,7 +5,7 @@ import EditStakeHolderModal from "../Modals/EditStakeHolderModal";
 import ExportAsPdf from "../Service/ExportAsPdf";
 
 function StakeHolder({ projectId,role }) {
-  // console.log(`in versionhistory ${projectId}`)
+  
   const [StakeHolders, setStakeHolder] = useState([]);
   const [newStakeHolder, setNewStakeHolder] = useState({
     projectId: `${projectId}`,

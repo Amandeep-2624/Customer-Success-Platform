@@ -4,7 +4,7 @@ import "../Styles/VersionHistory.css";
 import ExportAsPdf from "../Service/ExportAsPdf";
 
 function Sprint({ projectId,role }) {
-  // console.log(`in versionhistory ${projectId}`)
+  
   const [SprintHistory, setSprintHistory] = useState([]);
   const [newSprint, setNewSprint] = useState({
     projectId: `${projectId}`,

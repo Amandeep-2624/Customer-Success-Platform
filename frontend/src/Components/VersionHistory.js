@@ -5,7 +5,7 @@ import EditVersionModal from "../Modals/EditVersionModal";
 import ExportAsPdf from "../Service/ExportAsPdf";
 
 function VersionHistory({ projectId,role}) {
-  // console.log(`in versionhistory ${projectId}`)
+  
   const [versionHistory, setVersionHistory] = useState([]);
   const [newVersion, setNewVersion] = useState({
     version: "",

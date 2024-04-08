@@ -31,8 +31,6 @@ function ClientFeedback({ projectId,role }) {
     fetchClientMoM();
   }, [projectId]);
 
-//   console.log(AuditHistory);
-
 
   const handleAddNewMoM = () => {
     setNewMoM({ ...newMoM, isEditing: true });

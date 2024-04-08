@@ -5,7 +5,6 @@ import EditAuditModal from "../Modals/EditAuditModal";
 import ExportAsPdf from "../Service/ExportAsPdf";
 
 function ClientFeedback({ projectId,role}) {
-  // console.log(`in versionhistory ${projectId}`)
   const [ClientFeedback, setClientFeedback] = useState([]);
   const [newFeedback, setNewFeedback] = useState({
     projectId: `${projectId}`,
@@ -38,7 +37,6 @@ function ClientFeedback({ projectId,role}) {
     fetchAuditHistory();
   }, [projectId]);
 
-//   console.log(AuditHistory);
 
 
   const handleAddNewFeedback = () => {
@@ -63,12 +61,6 @@ function ClientFeedback({ projectId,role}) {
         closureDate: "",
         isEditing: false,
       });
-
-      await axios.post('${BASE_URL}/send-email', {
-        subject: 'New Audit Added',
-        text: 'A new audit has been added.',...newFeedback
-      });
-      // window.location.reload();
     } catch (error) {
       console.error("Error saving new version:", error);
     }

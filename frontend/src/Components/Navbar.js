@@ -18,9 +18,6 @@ function Navbar() {
         redirect: 'follow'
       };
     const { user, isAuthenticated, isLoading } = useAuth0();
-    if(!isLoading && isAuthenticated && user){
-        console.log(`in navbar ${user.sub}`);
-    }
 
     useEffect(()=>{
         const fetchUserRole=async ()=>{
@@ -30,7 +27,6 @@ function Navbar() {
                 var roleData=await roleResponse.json();
                 setUserRole(roleData);
                 }
-                // console.log(`in navbar user role is ${roleData}`);
             }
             catch(err){
                 console.log("Error",err);
@@ -42,7 +38,6 @@ function Navbar() {
     var role;
 
     if(isAuthenticated &&!isLoading && UserRole[0]){
-    console.log(`user role is ${UserRole[0].name}`);
     role=UserRole[0].name;
     }
 

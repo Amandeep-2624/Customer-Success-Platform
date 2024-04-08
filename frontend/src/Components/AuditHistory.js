@@ -7,7 +7,6 @@ import {toast} from 'react-toastify';
 
 
 function AuditHistory({ projectId ,role}) {
-  // console.log(`in versionhistory ${projectId}`)
   const [AuditHistory, setAuditHistory] = useState([]);
   const [newAudit, setNewAudit] = useState({
     projectId: `${projectId}`,
@@ -24,7 +23,6 @@ function AuditHistory({ projectId ,role}) {
   const [showEditModal, setShowEditModal] = useState(false);
   
   const BASE_URL=process.env.REACT_APP_BASE_URL
-  console.log("base url is",BASE_URL);
 
 
   useEffect(() => { 
@@ -41,8 +39,6 @@ function AuditHistory({ projectId ,role}) {
 
     fetchAuditHistory();
   }, [projectId]);
-
-  console.log(AuditHistory);
 
 
   const handleAddNewAudit = () => {
@@ -69,7 +65,7 @@ function AuditHistory({ projectId ,role}) {
         isEditing: false,
       });
 
-      // window.location.reload();
+    
       
       await axios.post(`${BASE_URL}/send-email`, {
         projectId:{projectId},
